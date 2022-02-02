@@ -9,8 +9,12 @@ import CalendarViewDayIcon from "@material-ui/icons/CalendarViewDay";
 import Post from "./Post";
 import { db } from "./firebase";
 import firebase from "firebase/compat/app";
+import { useSelector } from "react-redux";
+import { selectUser } from "./features/userSlice";
 
 function Feed() {
+  const user = useSelector(selectUser);
+
   const [input, setInput] = useState("");
   const [posts, setPosts] = useState([]);
 
@@ -40,13 +44,10 @@ function Feed() {
 
     e.preventDefault();
     db.collection("posts").add({
-      name: "Rontu Barhoi",
-      description: "Software Engineer",
+      name: user.displayName,
+      description: user.email,
       message: input,
-      photoUrl:
-        "https://randomuser.me/api/portraits/men/" +
-        Math.floor(Math.random() * 10) +
-        ".jpg",
+      photoUrl: user.photoURL || "",
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setInput("");
