@@ -10,6 +10,8 @@ import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
 import Widgets from "./Widgets";
 
+// TODO : APP LINK : https://linkedin-clone-bf20a.web.app/
+
 function App() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
